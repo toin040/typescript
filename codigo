@@ -96,6 +96,48 @@ function hasSpecialChar(password:string): boolean {
 }
 
 function main() {
+
+    try{ //tente executar
+
+        const password = input ('Senha  : ')
+        const strongness = evaluatePassword(password)  
+        print (`Robustez: ${strongness}`)
+    } catch { //capture a excecao
+        console.log('Erro avaliando a senha.')
+    }
+}
+main()
+            return true
+        }
+    }
+    return false 
+}
+function hasNumericDigitLetter(password:string): boolean {
+    const firstNumericDigitCode = 48
+    const lastNumericDigitCode = 57
+
+
+    for(let index=0; index < password.length; index++){
+        const code = password.charCodeAt(index)
+        if(code >= firstNumericDigitCode && code <= lastNumericDigitCode) {
+            return true
+        }
+    }
+    return false 
+}
+function hasSpecialChar(password:string): boolean {
+    const specialChars = '@#$%/*-:.='
+
+    for(let index=0; index < password.length; index++){
+        if (specialChars.includes(password[index]!)) {
+            return true
+        }
+    }
+    return false   
+
+}
+
+function main() {
     const password = input ('Senha  : ')
     const strongness = evaluatePassword(password)
     print (`Robustez: ${strongness}`)
