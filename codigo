@@ -1,0 +1,104 @@
+
+import {input, print} '../lib/stdio'
+
+//Password stroness criterias
+
+    //At lesat 1 upper letter
+    //At least 1 lower letter
+    //At least 1 numeric digit
+    //At least 1 of following chars: '@#$%/*-:.='
+    
+    //Weak password has max 1 to 2 of criterias above
+    //Medium password has 3 of criterias above
+    //Strong password has all 4 of criterias above
+    
+
+function evaluatePassword(password: string): void {
+    const passwordMinLength = 8
+    const passwordMaxLength = 20
+    if (password.length === 0) {
+        throw new Error(`Password cannot be empty`)
+    }
+    if(password.length < passwordMinLength || password.length > passwordMaxLength) {
+        throw new Error(`Password must have 8 to 20 character`)
+    }
+    if(password.includes(' ')) {
+        throw new Error('Password cannot contain empty spaces')
+    }
+
+    let criteraCounter = 0
+    if(hasUpperLetter(password)) {
+        criteraCounter ++
+    }
+    if(hasLowerLetter(password)) {
+        criteraCounter ++
+    }
+    if(hasNumericDigitLetter(password)) {
+        criteraCounter ++
+    }
+    if(hasSpecialChar(password)) {
+        criteraCounter ++
+    }
+    if(criteraCounter === 4) {
+
+    }
+}
+
+function hasUpperLetter(password:string): boolean {
+    const firstUpperLetterCode = 65
+    const lastUpperLetterCode = 90
+
+
+    for(let index=0; index < password.length; index++){
+        const code = password.charCodeAt(index)
+        if(code >= firstUpperLetterCode && code <= lastUpperLetterCode) {
+            return true
+        }
+    }
+    return false 
+}
+function hasLowerLetter(password:string): boolean {
+    const firstLowerLetterCode = 97
+    const lastLowerLetterCode = 122
+
+
+    for(let index=0; index < password.length; index++){
+        const code = password.charCodeAt(index)
+        if(code >= firstLowerLetterCode && code <= lastLowerLetterCode) {
+            return true
+        }
+    }
+    return false 
+}
+function hasNumericDigitLetter(password:string): boolean {
+    const firstNumericDigitCode = 48
+    const lastNumericDigitCode = 57
+
+
+    for(let index=0; index < password.length; index++){
+        const code = password.charCodeAt(index)
+        if(code >= firstNumericDigitCode && code <= lastNumericDigitCode) {
+            return true
+        }
+    }
+    return false 
+}
+function hasSpecialChar(password:string): boolean {
+    const specialChars = '@#$%/*-:.='
+
+    for(let index=0; index < password.length; index++){
+        if (specialChars.includes(password[index]!)) {
+            return true
+        }
+    }
+    return false   
+
+}
+
+function main() {
+    const password = input ('Senha  : ')
+    const strongness = evaluatePassword(password)
+    print (`Robustez: ${strongness}`)
+}
+
+main()
